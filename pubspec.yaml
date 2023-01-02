@@ -1,0 +1,60 @@
+name: organizer
+description: A new Flutter project.
+
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.18.5 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  flutter_staggered_animations: ^1.1.1
+  font_awesome_flutter: ^10.2.1
+  mobx: ^2.1.1
+  flutter_mobx: ^2.0.6+4
+  get_it: ^7.2.0
+  image_size_getter: ^2.1.2
+  gallery_saver: ^2.3.2
+  mask_text_input_formatter: ^2.0.0
+  pinch_zoom: ^1.0.0
+  flutter_launcher_icons: ^0.10.0
+  another_flushbar: ^1.12.29
+  intl: ^0.17.0
+  shimmer: ^2.0.0
+  http: ^0.13.5
+  crypto: ^3.0.2
+  dart_jsonwebtoken: ^2.4.2
+  timelines: ^0.1.0
+  responsive_framework: ^0.2.0
+  page_transition: ^2.0.9
+  brasil_fields: ^1.6.0
+  pinput: ^2.2.16
+  cpf_cnpj_validator: ^2.0.0
+  easy_web_view: ^1.6.0
+  flutter_svg: ^1.1.6
+  device_info_plus: ^8.0.0
+  flutter_countdown_timer: ^4.1.0
+  custom_pop_up_menu: ^1.2.4
+  flutter_pagination: ^0.0.8
+  percent_indicator: ^4.2.2
+  dio: ^4.0.6
+  flutter_masked_text: ^0.7.0
+  fl_chart: ^0.55.2
+  uuid: ^3.0.7
+  animations: ^2.0.7
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mobx_codegen: ^2.0.2
+  build_runner: ^2.1.1
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
