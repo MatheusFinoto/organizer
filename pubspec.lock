@@ -211,6 +211,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.16.0"
+  confetti:
+    dependency: "direct main"
+    description:
+      name: confetti
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.7.0"
   convert:
     dependency: transitive
     description:
@@ -992,6 +999,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  slide_action:
+    dependency: "direct main"
+    description:
+      name: slide_action
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.2"
   smart_auth:
     dependency: transitive
     description:

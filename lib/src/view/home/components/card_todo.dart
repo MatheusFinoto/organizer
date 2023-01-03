@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:organizer/src/view/task/task_screen.dart';
+import 'package:organizer/src/models/task_model.dart';
+import 'package:organizer/src/utils/theme.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../utils/constants.dart';
 
 class CardTodo extends StatelessWidget {
-  CardTodo({super.key});
+  const CardTodo(
+      {super.key,
+      required this.firstColor,
+      required this.secondColor,
+      required this.openContainer,
+      required this.taskModel});
 
-  Color firstColor = randomColor();
-  Color secondColor = randomColor();
+  final Color firstColor;
+  final Color secondColor;
+  final VoidCallback openContainer;
+  final TaskModel taskModel;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           gradient: LinearGradient(
@@ -21,14 +28,7 @@ class CardTodo extends StatelessWidget {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight)),
       child: InkWell(
-        borderRadius: BorderRadius.circular(20),
-        onTap: () {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => TaskScreen(
-                    firstColor: firstColor,
-                    secondColor: secondColor,
-                  )));
-        },
+        onTap: openContainer,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -38,7 +38,7 @@ class CardTodo extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      "#${const Uuid().v4().substring(0, 8).toUpperCase()}",
+                      "#${taskModel.id!.substring(0, 8)}",
                       style: Theme.of(context)
                           .textTheme
                           .titleSmall!
@@ -46,7 +46,7 @@ class CardTodo extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '17:30',
+                    dateFormatBrlTime(date: taskModel.doneAt!),
                     style: Theme.of(context)
                         .textTheme
                         .titleSmall!
@@ -57,8 +57,10 @@ class CardTodo extends StatelessWidget {
                   ),
                   CircleAvatar(
                     backgroundColor: Colors.black.withOpacity(0.1),
-                    child: const Icon(
-                      Icons.timer_outlined,
+                    child: Icon(
+                      taskModel.done!
+                          ? Icons.check_outlined
+                          : Icons.timer_outlined,
                       color: Colors.black,
                     ),
                   )
@@ -71,7 +73,7 @@ class CardTodo extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      'Comprar ração do cachorro',
+                      taskModel.title!,
                       style: Theme.of(context)
                           .textTheme
                           .headlineSmall!

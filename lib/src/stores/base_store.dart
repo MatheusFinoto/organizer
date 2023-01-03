@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:organizer/src/models/task_model.dart';
+import 'package:organizer/src/utils/constants.dart';
+import 'package:uuid/uuid.dart';
 
 part 'base_store.g.dart';
 
@@ -34,4 +37,47 @@ abstract class _BaseStore with Store {
 
   @action
   void setTheme(value) => themeDark = value;
+
+  var task = {
+    "id": "",
+    "title": "",
+    "description": "",
+    "created_at": "",
+    "done_at": "",
+    "done": true,
+  };
+
+  @observable
+  ObservableList<TaskModel> listOfTasks = ObservableList();
+
+  @observable
+  HttpStatus getTasksStatus = HttpStatus.none;
+
+  final now = DateTime.now();
+
+  @action
+  Future<void> getListOfTasks() async {
+    try {
+      getTasksStatus = HttpStatus.loading;
+
+      listOfTasks.add(TaskModel(
+          id: const Uuid().v4(),
+          title: 'Comprar Ração',
+          description:
+              'Passar na loja do Gim e comprar ração pro gato e pro Cachorro',
+          done: false,
+          createdAt: now.toUtc().toString(),
+          doneAt: now.add(const Duration(hours: 2)).toUtc().toString()));
+    } catch (e) {
+      getTasksStatus = HttpStatus.fail;
+    }
+  }
+
+  @observable
+  TaskModel? selectedTaskModel;
+
+  @action
+  void setSelectedTaskModel(value) {
+    selectedTaskModel = value;
+  }
 }

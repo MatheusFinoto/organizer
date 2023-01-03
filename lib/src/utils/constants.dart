@@ -141,8 +141,8 @@ String dateFormatBrlComplete({required String date}) {
 }
 
 String dateFormatBrlTime({required String date}) {
-  var inputFormat = DateFormat('yyyy-MM-ddTHH:mmZ');
-  var inputDate = inputFormat.parse(date).toLocal();
+  var inputFormat = DateFormat('yyyy-MM-dd HH:mmZ');
+  var inputDate = inputFormat.parse(date, true).toLocal();
   var outputFormat = DateFormat('HH:mm');
   return outputFormat.format(inputDate);
 }
@@ -152,6 +152,18 @@ String dateFormatBrlDate({required String date}) {
   var inputDate = inputFormat.parse(date);
   var outputFormat = DateFormat('dd/MM/yyyy');
   return outputFormat.format(inputDate);
+}
+
+int daysBetween(DateTime from, DateTime to) {
+  from = DateTime(from.year, from.month, from.day, from.hour, from.minute);
+  to = DateTime(to.year, to.month, to.day, to.hour, to.minute);
+  return (to.difference(from).inMinutes);
+}
+
+String durationToString(int minutes) {
+  var d = Duration(minutes: minutes);
+  List<String> parts = d.toString().split(':');
+  return '${parts[0].padLeft(2, '0')}h ${parts[1].padLeft(2, '0')}m';
 }
 
 late var products = [

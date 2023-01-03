@@ -88,6 +88,62 @@ mixin _$BaseStore on _BaseStore, Store {
     });
   }
 
+  late final _$listOfTasksAtom =
+      Atom(name: '_BaseStore.listOfTasks', context: context);
+
+  @override
+  ObservableList<TaskModel> get listOfTasks {
+    _$listOfTasksAtom.reportRead();
+    return super.listOfTasks;
+  }
+
+  @override
+  set listOfTasks(ObservableList<TaskModel> value) {
+    _$listOfTasksAtom.reportWrite(value, super.listOfTasks, () {
+      super.listOfTasks = value;
+    });
+  }
+
+  late final _$getTasksStatusAtom =
+      Atom(name: '_BaseStore.getTasksStatus', context: context);
+
+  @override
+  HttpStatus get getTasksStatus {
+    _$getTasksStatusAtom.reportRead();
+    return super.getTasksStatus;
+  }
+
+  @override
+  set getTasksStatus(HttpStatus value) {
+    _$getTasksStatusAtom.reportWrite(value, super.getTasksStatus, () {
+      super.getTasksStatus = value;
+    });
+  }
+
+  late final _$selectedTaskModelAtom =
+      Atom(name: '_BaseStore.selectedTaskModel', context: context);
+
+  @override
+  TaskModel? get selectedTaskModel {
+    _$selectedTaskModelAtom.reportRead();
+    return super.selectedTaskModel;
+  }
+
+  @override
+  set selectedTaskModel(TaskModel? value) {
+    _$selectedTaskModelAtom.reportWrite(value, super.selectedTaskModel, () {
+      super.selectedTaskModel = value;
+    });
+  }
+
+  late final _$getListOfTasksAsyncAction =
+      AsyncAction('_BaseStore.getListOfTasks', context: context);
+
+  @override
+  Future<void> getListOfTasks() {
+    return _$getListOfTasksAsyncAction.run(() => super.getListOfTasks());
+  }
+
   late final _$_BaseStoreActionController =
       ActionController(name: '_BaseStore', context: context);
 
@@ -136,13 +192,27 @@ mixin _$BaseStore on _BaseStore, Store {
   }
 
   @override
+  void setSelectedTaskModel(dynamic value) {
+    final _$actionInfo = _$_BaseStoreActionController.startAction(
+        name: '_BaseStore.setSelectedTaskModel');
+    try {
+      return super.setSelectedTaskModel(value);
+    } finally {
+      _$_BaseStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 selectedPage: ${selectedPage},
 expand: ${expand},
 showContent: ${showContent},
 pageController: ${pageController},
-themeDark: ${themeDark}
+themeDark: ${themeDark},
+listOfTasks: ${listOfTasks},
+getTasksStatus: ${getTasksStatus},
+selectedTaskModel: ${selectedTaskModel}
     ''';
   }
 }
